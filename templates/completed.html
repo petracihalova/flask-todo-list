@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Dokončené úkoly</h2>
+{% if not seznam_ukolu %}
+    <p>Nemáte žádné dokončené úkoly.</p>
+{% endif %}
+<ul class="list-group">
+    {% for ukol in seznam_ukolu %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+            {% if ukol.priority == "high" %}
+            {% set priority_class = "text-danger" %}
+            {% elif ukol.priority == "medium" %}
+            {% set priority_class = "text-warning" %}
+            {% elif ukol.priority == "low" %}
+            {% set priority_class = "text-success" %}
+            {% endif %}
+
+            <span class="{{ priority_class }}">&#9673;</span>
+            <strong>{{ ukol.title }}</strong>
+            {% if ukol.details %}
+            - {{ ukol.details }}
+            {% endif %}
+        </div>
+        <div>
+            <a class="btn btn-secondary" href="{{ url_for('uncomplete_task', task_id=ukol.id) }}">Označit jako
+                nedokončený</a>
+            <a class="btn btn-danger" href="{{ url_for('delete_task', task_id=ukol.id) }}">Smazat</a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container col-md-6">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+    {% if messages %}
+    <div>
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</div>
+<div class="container col-md-6">
+    <h1>Přihlášení:</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label }}<br>
+            <div class="input-group">
+                {{ form.password(class="form-control", id="password") }}
+                <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('password')">
+                    <i class="bi bi-eye" id="eye-icon-password"></i>
+                </button>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-4">
+            Přihlásit se
+        </button>
+    </form>
+    <p>Nemáte ještě účet? <a href="/register">Registrujte se zde</a></p>
+</div>
+{% endblock %}

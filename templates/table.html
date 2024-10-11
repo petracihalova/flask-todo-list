@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <!-- Seznam úkolů -->
+    <h2 class="mt-3">Tabulka s úkoly</h2>
+    <table id="tasks" class="table table-striped">
+        <thead>
+            <tr>
+                <th>Úkol</th>
+                <th>Detaily</th>
+                <th>Priorita</th>
+                <th>Dokončeno</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ukol in seznam_ukolu %}
+            <tr>
+                <td>{{ ukol.title }}</td>
+                <td>{{ ukol.details }}</td>
+                <td>{{ ukol.priority }}</td>
+                <td>{{ "Hotovo" if ukol.completed }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

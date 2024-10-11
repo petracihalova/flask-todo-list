@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <h1>Upravit úkol</h1>
+    <!-- Formulář pro úpravu úkolu -->
+    <form method="POST" novalidate>
+        {{ formular.hidden_tag() }}
+        <div class="form-group mb-3">
+            {{ formular.title(class="form-control") }}
+            {% for error in formular.title.errors %}
+            <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        <div class="form-group mb-3">
+            {{ formular.details(class="form-control") }}
+        </div>
+        <div class="form-group mb-3">
+            {{ formular.priority(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary mb-4">Uložit změny</button>
+    </form>
+    <a class="btn btn-secondary" href="{{ url_for('index') }}">Zpět na hlavní stránku</a>
+</div>
+{% endblock %}
